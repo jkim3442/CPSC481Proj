@@ -1,6 +1,6 @@
 const actions = {};
 
-actions.alabama = async () => {
+actions.findPath = async () => {
 
 }
 
