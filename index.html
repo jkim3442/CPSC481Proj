@@ -8,21 +8,26 @@
     </head>
     <body>
         <h1>CPSC 481 Project</h1>
-        <div class="dropdown">
-            <button class="dropbtn">Starting Destination</button>
-            <div class="dropdown-content">
-              <a href="#">Alabama - Montgomery</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
-            </div>
+        <div>
+            <h3>Starting State</h3>
+            <select name="state" id="startState">
+                <option value="alabama">Alabama - Montgomery</option>
+                <option value="alaska">Alaska - Juneau</option>
+            </select>
         </div>
-        <div class="dropdown">
-            <button class="dropbtn">Final Destination</button>
-            <div class="dropdown-content">
-              <a href="#">Link 1</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
-            </div>
+        <div>
+            <h3>End State</h3>
+            <select name="state" id="endState">
+                <option value="alabama">Alabama - Montgomery</option>
+                <option value="alaska">Alaska - Juneau</option>
+            </select>
         </div>
+        <div>
+            <button type="button" data-action="findPath">Go!</button>
+        </div>
+        <div>
+            <img src="images/usMap.png" alt="US-Map">
+        </div>
+        <script src="js/script.js"></script>
     </body>
 </html>
