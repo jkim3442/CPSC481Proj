@@ -1,13 +1,13 @@
-import MapChart from './components/MapChart.jsx';
+import MapChart from './components/MapChart';
 
 function App() {
   return (
     <>
-      <main className="flex justify-center">
-        <section className="border w-full md:w-9/12 lg:w-8/12 xl:w-7/12">
+      <div className="container mx-auto border">
+        <section className="mx-auto w-full border-2 border-red-300 md:w-11/12 lg:w-10/12 xl:w-8/12">
           <MapChart />
         </section>
-      </main>
+      </div>
     </>
   );
 }
