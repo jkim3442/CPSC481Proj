@@ -1,5 +1,10 @@
 import pandas as pd
 import networkx as nx
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
 
 url = "https://www.transtats.bts.gov/AverageFare/?Year=2021"
 
@@ -52,24 +57,33 @@ def algo_function(start, end):
     #Calculate shortest path
     try:
         shortest_path = nx.shortest_path(G, source=start, target=end, weight='weight')
-        return shortest_path
+
+        response = "Optimized Itinerary: "
+        for i in range(len(shortest_path)-1):
+            start = shortest_path[i]
+            end = shortest_path[i+1]
+            for record in apc_agfDict:
+                if record['Airport Code'] == start:
+                    start_name = start
+                    start_avg_fare = record['Average Fare ($)']
+                if record['Airport Code'] == end:
+                    end_name = end
+                    end_avg_fare = record['Average Fare ($)']
+            response += f"From {start_name} to {end_name}, Average Fare: ${end_avg_fare}"
+
+        return response
     except nx.NetworkXNoPath:
         return None
 
-shortestPath = algo_function("JFK", "LAX")
+# shortestPath = algo_function("JFK", "LAX")
 
-if shortestPath:
-    print("Optimized Itinerary:")
-    for i in range(len(shortestPath)-1):
-        start = shortestPath[i]
-        end = shortestPath[i+1]
-        for record in apc_agfDict:
-            if record['Airport Code'] == start:
-                start_name = start
-                start_avg_fare = record['Average Fare ($)']
-            if record['Airport Code'] == end:
-                end_name = end
-                end_avg_fare = record['Average Fare ($)']
-        print(f"From {start_name} to {end_name}, Average Fare: ${end_avg_fare}")
-else:
-    print("No valid itinerary found.")
+@app.route('/calculate_shortest_path', methods=['POST'])
+def calculate_shortest_path():
+    data = request.json
+    start = data['start']
+    end = data['end']
+    short = algo_function(start, end)
+    return jsonify({'shortest path': short})
+
+if __name__ == '__main__':
+    app.run(debug=True)
