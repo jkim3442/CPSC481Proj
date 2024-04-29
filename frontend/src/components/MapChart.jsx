@@ -8,31 +8,14 @@ import {
   ZoomableGroup,
 } from 'react-simple-maps';
 
-const markers = {
-  California: {
-    capital: 'Sacramento',
-    coordinates: [-121.493629, 38.576668],
-  },
-  Florida: {
-    capital: 'Tallahassee',
-    coordinates: [-84.281296, 30.438118],
-  },
-  Hawaii: {
-    capital: 'Honolulu',
-    coordinates: [-157.857376, 21.307442],
-  },
-  'New York': {
-    capital: 'Albany',
-    coordinates: [-73.757874, 42.652843],
-  },
-};
+import markers from '../markers';
 
 const geoUrl = '/states.json';
 const pickedColorPath = '#50d45d';
 const colorPath = '#87877f';
 
 function MapChart() {
-  console.log('- <MapChart>');
+  console.log('<MapChart>');
   const [statePicked, setStatePicked] = useState(undefined);
 
   function handleStateClick(stateName) {
