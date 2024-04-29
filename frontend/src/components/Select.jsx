@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 
 import DropDown from './DropDown';
 import Modal from './Modal';
@@ -63,9 +64,14 @@ export default function Select() {
 
   return (
     <>
-      <Modal open={isModalOpen.open} onClose={closeModal}>
-        <SubmitError message={isModalOpen.message} onClick={closeModal} />
-      </Modal>
+      <AnimatePresence>
+        {isModalOpen.open && (
+          <Modal open={isModalOpen.open} onClose={closeModal}>
+            <SubmitError message={isModalOpen.message} onClick={closeModal} />
+          </Modal>
+        )}
+      </AnimatePresence>
+
       <section className="flex justify-end gap-1">
         <DropDown
           label="Select starting state"

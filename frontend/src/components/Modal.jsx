@@ -1,6 +1,8 @@
 import { useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
+import { motion, AnimatePresence } from 'framer-motion';
+
 export default function Modal({ open, onClose, children }) {
   console.log('<Modal/>');
   let dialogRef = useRef();
@@ -28,13 +30,18 @@ export default function Modal({ open, onClose, children }) {
   }, [open]);
 
   return createPortal(
-    <dialog
-      className="w-80 rounded-md bg-white p-4 shadow-md backdrop:bg-stone-950/50"
-      ref={dialogRef}
-      onClose={onClose}
-    >
-      {open ? children : null}
-    </dialog>,
+    <AnimatePresence>
+      <motion.dialog
+        initial={{ y: 30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 30, opacity: 0 }}
+        className="w-80 rounded-md bg-white p-4 shadow-md backdrop:bg-stone-950/50"
+        ref={dialogRef}
+        onClose={onClose}
+      >
+        {open ? children : null}
+      </motion.dialog>
+    </AnimatePresence>,
     document.getElementById('modal'),
   );
 }
