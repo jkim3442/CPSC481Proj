@@ -24,6 +24,11 @@ export default function Select() {
       return;
     }
 
+    if (startAirport === endAirport) {
+      console.log('Start and end state must be different!');
+      return;
+    }
+
     try {
       const resData = await fetchShortestPath(startAirport, endAirport);
       const message = resData['shortest path'];
