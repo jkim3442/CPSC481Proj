@@ -12,7 +12,7 @@ export default function Select() {
   const startStateRef = useRef();
   const endStateRef = useRef();
 
-  const [errorFetching, setErrorFetching] = useState();
+  const [errorFetching, setErrorFetching] = useState({ message: undefined });
   const [fetchedData, setFetchedData] = useState('');
 
   async function handleSubmit() {
@@ -65,6 +65,11 @@ export default function Select() {
       </section>
       {fetchedData && (
         <h3 className="mt-2 text-center font-bold">{fetchedData}</h3>
+      )}
+      {errorFetching.message && (
+        <h3 className="mt-2 text-center font-bold text-red-400">
+          {errorFetching.message}
+        </h3>
       )}
     </>
   );
