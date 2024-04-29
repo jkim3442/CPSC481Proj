@@ -1,5 +1,3 @@
-import logo from '/idk.png';
-
 export default function Header() {
   return (
     <>

@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react';
 
 import DropDown from './DropDown';
+import Modal from './Modal';
+import SubmitError from './SubmitError';
 
 import { fetchShortestPath } from '../http';
 
@@ -12,20 +14,37 @@ export default function Select() {
   const startStateRef = useRef();
   const endStateRef = useRef();
 
-  const [errorFetching, setErrorFetching] = useState({ message: undefined });
   const [fetchedData, setFetchedData] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState({
+    open: false,
+    message: '',
+  });
+
+  function closeModal() {
+    setIsModalOpen(false);
+  }
 
   async function handleSubmit() {
     const startAirport = startStateRef.current.value;
     const endAirport = endStateRef.current.value;
 
+    // If start or end location is not selected
     if (startAirport === 'none' || endAirport === 'none') {
-      console.log('Please select a location');
+      setIsModalOpen((prevModal) => ({
+        ...prevModal,
+        open: true,
+        message: 'Please select a state/captial for both starting and end',
+      }));
       return;
     }
 
+    // If both the start and end are the same
     if (startAirport === endAirport) {
-      console.log('Start and end state must be different!');
+      setIsModalOpen((prevModal) => ({
+        ...prevModal,
+        open: true,
+        message: 'Start and end state/capital must be different!',
+      }));
       return;
     }
 
@@ -34,14 +53,19 @@ export default function Select() {
       const message = resData['shortest path'];
       setFetchedData(message);
     } catch (error) {
-      setErrorFetching({
+      setIsModalOpen((prevModal) => ({
+        ...prevModal,
+        open: true,
         message: error.message,
-      });
+      }));
     }
   }
 
   return (
     <>
+      <Modal open={isModalOpen.open} onClose={closeModal}>
+        <SubmitError message={isModalOpen.message} onClick={closeModal} />
+      </Modal>
       <section className="flex justify-end gap-1">
         <DropDown
           label="Select starting state"
@@ -66,11 +90,6 @@ export default function Select() {
       {fetchedData && (
         <h3 className="mt-4 text-center font-bold md:text-2xl">
           {fetchedData}
-        </h3>
-      )}
-      {errorFetching.message && (
-        <h3 className="mt-2 text-center font-bold text-red-400">
-          {errorFetching.message}
         </h3>
       )}
     </>
