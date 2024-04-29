@@ -17,7 +17,7 @@ const DropDown = forwardRef(function DropDown(
     <select
       name="state"
       defaultValue="none"
-      className="rounded-md bg-blue-500 px-2 py-1 text-center font-medium hover:bg-blue-600"
+      className="rounded-md bg-blue-700 px-2 py-1 text-center font-medium shadow-lg hover:bg-blue-600"
       ref={ref}
     >
       <option value="none">{label}</option>

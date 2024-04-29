@@ -58,13 +58,15 @@ export default function Select() {
         <button
           type="button"
           onClick={handleSubmit}
-          className="rounded-md bg-green-600 px-2 py-1 text-center font-medium hover:bg-green-700"
+          className="rounded-md bg-green-700 px-2 py-1 text-center font-medium hover:bg-green-600"
         >
           Go
         </button>
       </section>
       {fetchedData && (
-        <h3 className="mt-2 text-center font-bold">{fetchedData}</h3>
+        <h3 className="mt-4 text-center font-bold md:text-2xl">
+          {fetchedData}
+        </h3>
       )}
       {errorFetching.message && (
         <h3 className="mt-2 text-center font-bold text-red-400">
