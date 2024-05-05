@@ -13,7 +13,7 @@ const findPath = async () => {
     })
     .then(response => response.json())
     .then(data => {
-        console.log('Shortest path:', data);
+        document.getElementById("statusResult").innerHTML = JSON.stringify(data);
     })
     .catch(error => {
         console.error('Error:', error);
@@ -28,4 +28,4 @@ document.addEventListener("DOMContentLoaded", () => {
 function darkMode() {
     var element = document.body;
     element.classList.toggle("dark-mode");
-  }
+}
