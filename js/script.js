@@ -14,6 +14,7 @@ const findPath = async () => {
     .then(response => response.json())
     .then(data => {
         console.log('Shortest path:', data);
+        document.getElementById("statusResult").innerHTML = JSON.stringify(data);
     })
     .catch(error => {
         console.error('Error:', error);
