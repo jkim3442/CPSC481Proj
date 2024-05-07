@@ -55,7 +55,7 @@ function MapChart() {
           {/* render markers */}
           {Object.entries(markers).map(([state, value]) => (
             <Marker key={state} coordinates={value.coordinates}>
-              <circle r={5} fill="#E42A1D" stroke="#fff" strokeWidth={2} />
+              <circle r={7} fill="#E42A1D" stroke="#fff" strokeWidth={0} />
               <text
                 textAnchor="middle"
                 y={-10}
@@ -65,36 +65,6 @@ function MapChart() {
               </text>
             </Marker>
           ))}
-
-          {/* render lines */}
-          <Line
-            stroke={statePicked === 'California' ? pickedColorPath : colorPath}
-            coordinates={[
-              markers.California.coordinates,
-              markers.Florida.coordinates,
-            ]}
-          />
-          <Line
-            stroke={statePicked === 'California' ? pickedColorPath : colorPath}
-            coordinates={[
-              markers.California.coordinates,
-              markers['New York'].coordinates,
-            ]}
-          />
-          <Line
-            stroke={statePicked === 'California' ? pickedColorPath : colorPath}
-            coordinates={[
-              markers.California.coordinates,
-              markers.Hawaii.coordinates,
-            ]}
-          />
-          <Line
-            stroke={statePicked === 'Florida' ? pickedColorPath : colorPath}
-            coordinates={[
-              markers['New York'].coordinates,
-              markers.Florida.coordinates,
-            ]}
-          />
         </ZoomableGroup>
       </ComposableMap>
     </>
