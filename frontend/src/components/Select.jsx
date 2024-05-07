@@ -34,7 +34,7 @@ export default function Select() {
       setIsModalOpen((prevModal) => ({
         ...prevModal,
         open: true,
-        message: 'Please select a state/captial for both starting and end',
+        message: 'Please select a state/captial for both starting and end.',
       }));
       return;
     }
@@ -44,7 +44,7 @@ export default function Select() {
       setIsModalOpen((prevModal) => ({
         ...prevModal,
         open: true,
-        message: 'Start and end state/capital must be different!',
+        message: 'Start and end state/capital must be different.',
       }));
       return;
     }
@@ -64,13 +64,11 @@ export default function Select() {
 
   return (
     <>
-      <AnimatePresence>
-        {isModalOpen.open && (
-          <Modal open={isModalOpen.open} onClose={closeModal}>
-            <SubmitError message={isModalOpen.message} onClick={closeModal} />
-          </Modal>
-        )}
-      </AnimatePresence>
+      {isModalOpen.open && (
+        <Modal open={isModalOpen.open} onClose={closeModal}>
+          <SubmitError message={isModalOpen.message} onClick={closeModal} />
+        </Modal>
+      )}
 
       <section className="flex justify-end gap-1">
         <DropDown

@@ -30,18 +30,16 @@ export default function Modal({ open, onClose, children }) {
   }, [open]);
 
   return createPortal(
-    <AnimatePresence>
-      <motion.dialog
-        initial={{ y: 30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: 30, opacity: 0 }}
-        className="w-80 rounded-md bg-white p-4 shadow-md backdrop:bg-stone-950/50"
-        ref={dialogRef}
-        onClose={onClose}
-      >
-        {open ? children : null}
-      </motion.dialog>
-    </AnimatePresence>,
+    <motion.dialog
+      initial={{ y: 30, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: 30, opacity: 0 }}
+      className="w-80 rounded-md bg-white p-4 shadow-md backdrop:bg-stone-950/50"
+      ref={dialogRef}
+      onClose={onClose}
+    >
+      {open ? children : null}
+    </motion.dialog>,
     document.getElementById('modal'),
   );
 }
