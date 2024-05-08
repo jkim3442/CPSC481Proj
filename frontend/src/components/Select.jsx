@@ -68,17 +68,16 @@ export default function Select() {
         </Modal>
       )}
 
-      <form onSubmit={handleSubmit}>
-        <section className="flex justify-end gap-1">
-          <DropDown name="startState" label="Select start state" />
-          <DropDown name="endState" label="Select end state" />
-          <button
-            type="submit"
-            className="rounded-md bg-green-700 px-2 py-1 text-center font-medium hover:bg-green-600"
-          >
-            Go
-          </button>
-        </section>
+      <form onSubmit={handleSubmit} className="flex justify-end gap-2">
+        <DropDown name="startState" label="Select start state" />
+        <p className="text-2xl font-bold">→</p>
+        <DropDown name="endState" label="Select end state" />
+        <button
+          type="submit"
+          className="rounded-md bg-green-700 px-2 py-1 text-center font-medium hover:bg-green-600"
+        >
+          Go
+        </button>
       </form>
 
       {fetchedData && (
