@@ -4,6 +4,8 @@ The basis of this project was to create a Flight Itinerary Optimizer application
 
 ## Installation
 
+### Backend
+
 To run the algorithm.py file you will need to install pandas, networkx, flask, and flask-cors. To do this go into your terminal and run the command:
 
 ```terminal
@@ -12,7 +14,7 @@ py -m pip install package
 
 Replace 'package' with the required packages and you should be able to install them.
 
-or use the requirements.txt file
+Otherwise use requirements.txt file
 
 ```bash
 pip install -r requirements.txt
@@ -24,11 +26,29 @@ to uninstall the packages run...
 pip uninstall -r requirements.txt -y
 ```
 
-To start up Flask all you have to do is run the python file. Once Flask is up and running, make sure the IP address assigned to the Flask app is the same as the fetch line in script.js to have the application correctly working. If not, update the fetch line in script.js to the correct IP address.
+To start up Flask all you have to do is run the python file
+
+```bash
+python algortihm.py
+```
+
+This will start the backend and be running on `http://localhost:5000` by default. To stop the server, use **CTRL + C**
+
+### Frontend
+
+Make sure to install the LTS version of Node.js (20.x.x) [here](https://nodejs.org/en/download/current)
+
+Once installed go into the frontend directory
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Once running you'll be given a local environment in `http://localhost:5173` to view the page. To stop the environment, use **CTRL + C**
 
 ## Usage
-
-The first button just toggles dark/light mode.
 
 The Starting State section has a drop down menu that allows you to choose a starting destination from the 50 states.
 
