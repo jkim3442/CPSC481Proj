@@ -1,6 +1,6 @@
+import Header from './components/Header';
 import MapChart from './components/MapChart';
 import Select from './components/Select';
-import Header from './components/Header';
 
 import StateSelectContextProvider from './store/stateSelect-context';
 

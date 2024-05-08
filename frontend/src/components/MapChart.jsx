@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { StateSelectContext } from '../store/stateSelect-context';
 import {
   ComposableMap,
   Geographies,
@@ -7,7 +6,9 @@ import {
   Marker,
 } from 'react-simple-maps';
 
-const geoUrl = '/states.json';
+import { StateSelectContext } from '../store/stateSelect-context';
+
+import geoJSON from '../assets/states.json';
 
 function MapChart() {
   console.log('<MapChart>');
@@ -17,14 +18,14 @@ function MapChart() {
   return (
     <ComposableMap projection="geoAlbersUsa">
       {/* Render states */}
-      <Geographies geography={geoUrl}>
+      <Geographies geography={geoJSON}>
         {({ geographies }) =>
           geographies.map((geo) => {
             return (
               <Geography
                 key={geo.rsmKey}
                 geography={geo}
-                fill="#d9f7d2"
+                fill="#cbfcae"
                 stroke="#000000"
                 strokeWidth={0.25}
               />

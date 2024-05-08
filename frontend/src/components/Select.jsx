@@ -5,10 +5,11 @@ import Modal from './Modal/Modal';
 import SubmitError from './Modal/SubmitError';
 
 import { fetchShortestPath } from '../http';
-export default function Select() {
-  console.log('<Select/>');
 
-  const [fetchedData, setFetchedData] = useState('');
+export default function Select() {
+  console.log('<Select />');
+
+  const [fetchedData, setFetchedData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState({
     open: false,
     message: '',
@@ -47,6 +48,7 @@ export default function Select() {
       return;
     }
 
+    // Make GET request
     try {
       const resData = await fetchShortestPath(startAirport, endAirport);
       const message = resData['shortest path'];
@@ -81,9 +83,7 @@ export default function Select() {
       </form>
 
       {fetchedData && (
-        <h3 className="mt-4 text-center font-bold md:text-2xl">
-          {fetchedData}
-        </h3>
+        <p className="mt-4 text-center font-bold md:text-2xl">{fetchedData}</p>
       )}
     </>
   );

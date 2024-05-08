@@ -1,10 +1,10 @@
-import { createContext, useReducer, useEffect } from 'react';
+import { createContext, useReducer } from 'react';
 import { capitals_coordinates } from '../coords';
 
 export const StateSelectContext = createContext({
   startState: 'none',
   endState: 'none',
-  states: [],
+  states: capitals_coordinates,
   updateSelected: () => {},
 });
 
@@ -39,16 +39,9 @@ export default function stateContextProvider({ children }) {
     {
       startState: 'none',
       endState: 'none',
-      states: [],
+      states: capitals_coordinates,
     },
   );
-
-  useEffect(() => {
-    selectedStatesDispatch({
-      type: 'INITIALIZE',
-      payload: { markers: capitals_coordinates },
-    });
-  }, []); // Empty dependency array ensures this runs only once
 
   function handleUpdate(start, end) {
     selectedStatesDispatch({
