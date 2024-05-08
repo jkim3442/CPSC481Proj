@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import DropDown from './DropDown';
-import Modal from './Modal';
-import SubmitError from './SubmitError';
+import Modal from './Modal/Modal';
+import SubmitError from './Modal/SubmitError';
 
 import { fetchShortestPath } from '../http';
 

@@ -1,7 +1,7 @@
-import { useRef, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function Modal({ open, onClose, children }) {
   console.log('<Modal/>');
