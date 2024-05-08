@@ -7,8 +7,6 @@ import {
   Marker,
 } from 'react-simple-maps';
 
-import markers from '../markers';
-
 const geoUrl = '/states.json';
 
 function MapChart() {
@@ -36,24 +34,34 @@ function MapChart() {
       </Geographies>
 
       {/* Render markers */}
-      {Object.entries(markers).map(([state, value]) => {
+      {selectedStatesCtx.states.map((state) => {
+        const { name, latitude, longitude } = state;
+        const coords = [longitude, latitude];
+
         let circleColor = '#8a8a8a';
+        let circleSize = 5;
         let textColor = '#5D5A6D';
 
         if (
-          selectedStatesCtx.startState === state ||
-          selectedStatesCtx.endState === state
+          selectedStatesCtx.startState === name ||
+          selectedStatesCtx.endState === name
         ) {
           circleColor = '#E42A1D';
+          circleSize = 7;
           textColor = '#fa673e';
         }
 
         return (
-          <Marker key={state} coordinates={value.coordinates}>
-            <circle r={7} fill={circleColor} stroke="#000" strokeWidth={1} />
-            <text textAnchor="middle" y={-10} style={{ fill: textColor }}>
-              {value.capital}
-            </text>
+          <Marker key={name} coordinates={coords}>
+            <circle
+              r={circleSize}
+              fill={circleColor}
+              stroke="#000"
+              strokeWidth={1}
+            />
+            {/* <text textAnchor="middle" y={-10} style={{ fill: textColor }}>
+              {state.capital}
+            </text> */}
           </Marker>
         );
       })}

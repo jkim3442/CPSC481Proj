@@ -1,8 +1,10 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useReducer, useEffect } from 'react';
+import { capitals_coordinates } from '../coords';
 
 export const StateSelectContext = createContext({
   startState: 'none',
   endState: 'none',
+  states: [],
   updateSelected: () => {},
 });
 
@@ -21,6 +23,13 @@ function selectedStatesReducer(state, action) {
     return newState;
   }
 
+  if (action.type === 'INITIALIZE') {
+    const newState = { ...state };
+    newState.states = action.payload.markers;
+
+    return newState;
+  }
+
   return state;
 }
 
@@ -28,10 +37,18 @@ export default function stateContextProvider({ children }) {
   const [selectedStatesState, selectedStatesDispatch] = useReducer(
     selectedStatesReducer,
     {
-      startState: '',
-      endState: '',
+      startState: 'none',
+      endState: 'none',
+      states: [],
     },
   );
+
+  useEffect(() => {
+    selectedStatesDispatch({
+      type: 'INITIALIZE',
+      payload: { markers: capitals_coordinates },
+    });
+  }, []); // Empty dependency array ensures this runs only once
 
   function handleUpdate(start, end) {
     selectedStatesDispatch({
@@ -46,6 +63,7 @@ export default function stateContextProvider({ children }) {
   const ctxValue = {
     startState: selectedStatesState.startState,
     endState: selectedStatesState.endState,
+    states: selectedStatesState.states,
     updateSelected: handleUpdate,
   };
 

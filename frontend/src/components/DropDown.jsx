@@ -1,30 +1,17 @@
 import { useContext } from 'react';
 import { StateSelectContext } from '../store/stateSelect-context';
-import { getStateCodeByStateName } from 'us-state-codes';
 
-export default function DropDown({ name, markers, sortedStates }) {
+export default function DropDown({ name, label }) {
   console.log('- <DropDown />');
 
   const selectedStatesCtx = useContext(StateSelectContext);
 
-  // Organize options in alphabetical order
-  const options = sortedStates.map((key) => (
-    <option value={key} key={key}>
-      {getStateCodeByStateName(key)} - {markers[key].capital}
-    </option>
-  ));
-
-  // Change startState/endState
   function handleChange(event) {
-    const state = event.target.value;
+    const selectedOption = event.target.selectedOptions[0];
+    const state = selectedOption.getAttribute('data-name');
     if (name === 'startState') selectedStatesCtx.updateSelected(state, '');
     else selectedStatesCtx.updateSelected('', state);
   }
-
-  // Control the lable text
-  let label;
-  if (name === 'startState') label = 'Select starting state';
-  else label = 'Select end state';
 
   return (
     <select
@@ -34,7 +21,15 @@ export default function DropDown({ name, markers, sortedStates }) {
       onChange={handleChange}
     >
       <option value="none">{label}</option>
-      {options}
+      {selectedStatesCtx.states.map((state) => {
+        const { name, capital, airport } = state;
+
+        return (
+          <option value={airport} data-name={name} key={name}>
+            {name} - {capital}
+          </option>
+        );
+      })}
     </select>
   );
 }

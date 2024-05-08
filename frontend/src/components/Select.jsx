@@ -5,10 +5,6 @@ import Modal from './Modal/Modal';
 import SubmitError from './Modal/SubmitError';
 
 import { fetchShortestPath } from '../http';
-
-import markers from '../markers';
-const sortedStates = Object.keys(markers).sort();
-
 export default function Select() {
   console.log('<Select/>');
 
@@ -74,16 +70,8 @@ export default function Select() {
 
       <form onSubmit={handleSubmit}>
         <section className="flex justify-end gap-1">
-          <DropDown
-            name="startState"
-            markers={markers}
-            sortedStates={sortedStates}
-          />
-          <DropDown
-            name="endState"
-            markers={markers}
-            sortedStates={sortedStates}
-          />
+          <DropDown name="startState" label="Select start state" />
+          <DropDown name="endState" label="Select end state" />
           <button
             type="submit"
             className="rounded-md bg-green-700 px-2 py-1 text-center font-medium hover:bg-green-600"
