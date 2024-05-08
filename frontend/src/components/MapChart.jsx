@@ -5,7 +5,6 @@ import {
   Geographies,
   Geography,
   Marker,
-  ZoomableGroup,
 } from 'react-simple-maps';
 
 import markers from '../markers';
@@ -18,57 +17,47 @@ function MapChart() {
   const selectedStatesCtx = useContext(StateSelectContext);
 
   return (
-    <>
-      <ComposableMap projection="geoAlbersUsa">
-        <ZoomableGroup>
-          <Geographies geography={geoUrl}>
-            {({ geographies }) =>
-              geographies.map((geo) => {
-                return (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    fill="#FF5533"
-                    stroke="#000000"
-                    onClick={() => {
-                      handleStateClick(geo.properties.name);
-                    }}
-                    style={{
-                      default: {
-                        fill: '#EEE',
-                      },
-                      hover: {
-                        fill: '#a1d9a0',
-                      },
-                    }}
-                  />
-                );
-              })
-            }
-          </Geographies>
+    <ComposableMap projection="geoAlbersUsa">
+      {/* Render states */}
+      <Geographies geography={geoUrl}>
+        {({ geographies }) =>
+          geographies.map((geo) => {
+            return (
+              <Geography
+                key={geo.rsmKey}
+                geography={geo}
+                fill="#d9f7d2"
+                stroke="#000000"
+                strokeWidth={0.25}
+              />
+            );
+          })
+        }
+      </Geographies>
 
-          {/* render markers */}
-          {Object.entries(markers).map(([state, value]) => (
-            <Marker key={state} coordinates={value.coordinates}>
-              {selectedStatesCtx.startState == state ||
-              selectedStatesCtx.endState == state ? (
-                <circle r={7} fill="#E42A1D" stroke="#000" strokeWidth={1} />
-              ) : (
-                <circle r={7} fill="#8a8a8a" stroke="#000" strokeWidth={1} />
-              )}
+      {/* Render markers */}
+      {Object.entries(markers).map(([state, value]) => {
+        let circleColor = '#8a8a8a';
+        let textColor = '#5D5A6D';
 
-              <text
-                textAnchor="middle"
-                y={-10}
-                style={{ fontFamily: 'system-ui', fill: '#5D5A6D' }}
-              >
-                {value.capital}
-              </text>
-            </Marker>
-          ))}
-        </ZoomableGroup>
-      </ComposableMap>
-    </>
+        if (
+          selectedStatesCtx.startState === state ||
+          selectedStatesCtx.endState === state
+        ) {
+          circleColor = '#E42A1D';
+          textColor = '#fa673e';
+        }
+
+        return (
+          <Marker key={state} coordinates={value.coordinates}>
+            <circle r={7} fill={circleColor} stroke="#000" strokeWidth={1} />
+            <text textAnchor="middle" y={-10} style={{ fill: textColor }}>
+              {value.capital}
+            </text>
+          </Marker>
+        );
+      })}
+    </ComposableMap>
   );
 }
 
