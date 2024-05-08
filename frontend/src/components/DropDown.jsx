@@ -1,10 +1,6 @@
-import { forwardRef } from 'react';
 import { getStateCodeByStateName } from 'us-state-codes';
 
-const DropDown = forwardRef(function DropDown(
-  { label, markers, sortedStates },
-  ref,
-) {
+export default function DropDown({ name, label, markers, sortedStates }) {
   console.log('- <DropDown />');
 
   const options = sortedStates.map((key) => (
@@ -15,15 +11,12 @@ const DropDown = forwardRef(function DropDown(
 
   return (
     <select
-      name="state"
+      name={name}
       defaultValue="none"
       className="rounded-md bg-blue-700 px-2 py-1 text-center font-medium shadow-lg hover:bg-blue-600"
-      ref={ref}
     >
       <option value="none">{label}</option>
       {options}
     </select>
   );
-});
-
-export default DropDown;
+}

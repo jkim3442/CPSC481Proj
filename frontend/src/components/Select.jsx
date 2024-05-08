@@ -1,5 +1,4 @@
-import { useRef, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 
 import DropDown from './DropDown';
 import Modal from './Modal';
@@ -12,8 +11,6 @@ const sortedStates = Object.keys(markers).sort();
 
 export default function Select() {
   console.log('<Select/>');
-  const startStateRef = useRef();
-  const endStateRef = useRef();
 
   const [fetchedData, setFetchedData] = useState('');
   const [isModalOpen, setIsModalOpen] = useState({
@@ -25,9 +22,15 @@ export default function Select() {
     setIsModalOpen(false);
   }
 
-  async function handleSubmit() {
-    const startAirport = startStateRef.current.value;
-    const endAirport = endStateRef.current.value;
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    const fd = new FormData(event.target);
+    const data = Object.fromEntries(fd.entries());
+    console.log(data);
+
+    const startAirport = data.startState;
+    const endAirport = data.endState;
 
     // If start or end location is not selected
     if (startAirport === 'none' || endAirport === 'none') {
@@ -70,27 +73,29 @@ export default function Select() {
         </Modal>
       )}
 
-      <section className="flex justify-end gap-1">
-        <DropDown
-          label="Select starting state"
-          markers={markers}
-          sortedStates={sortedStates}
-          ref={startStateRef}
-        />
-        <DropDown
-          label="Select end state"
-          markers={markers}
-          sortedStates={sortedStates}
-          ref={endStateRef}
-        />
-        <button
-          type="button"
-          onClick={handleSubmit}
-          className="rounded-md bg-green-700 px-2 py-1 text-center font-medium hover:bg-green-600"
-        >
-          Go
-        </button>
-      </section>
+      <form onSubmit={handleSubmit}>
+        <section className="flex justify-end gap-1">
+          <DropDown
+            name="startState"
+            label="Select starting state"
+            markers={markers}
+            sortedStates={sortedStates}
+          />
+          <DropDown
+            name="endState"
+            label="Select end state"
+            markers={markers}
+            sortedStates={sortedStates}
+          />
+          <button
+            type="submit"
+            className="rounded-md bg-green-700 px-2 py-1 text-center font-medium hover:bg-green-600"
+          >
+            Go
+          </button>
+        </section>
+      </form>
+
       {fetchedData && (
         <h3 className="mt-4 text-center font-bold md:text-2xl">
           {fetchedData}
