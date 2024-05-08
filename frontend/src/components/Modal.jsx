@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Modal({ open, onClose, children }) {
   console.log('<Modal/>');
+
   let dialogRef = useRef();
 
   function checkClickOutside(event) {

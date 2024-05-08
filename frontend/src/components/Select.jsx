@@ -27,7 +27,6 @@ export default function Select() {
 
     const fd = new FormData(event.target);
     const data = Object.fromEntries(fd.entries());
-    console.log(data);
 
     const startAirport = data.startState;
     const endAirport = data.endState;
@@ -77,13 +76,11 @@ export default function Select() {
         <section className="flex justify-end gap-1">
           <DropDown
             name="startState"
-            label="Select starting state"
             markers={markers}
             sortedStates={sortedStates}
           />
           <DropDown
             name="endState"
-            label="Select end state"
             markers={markers}
             sortedStates={sortedStates}
           />

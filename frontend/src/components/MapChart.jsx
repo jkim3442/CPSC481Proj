@@ -1,26 +1,21 @@
-import { useState } from 'react';
+import { useContext } from 'react';
+import { StateSelectContext } from '../store/stateSelect-context';
 import {
   ComposableMap,
   Geographies,
   Geography,
   Marker,
-  Line,
   ZoomableGroup,
 } from 'react-simple-maps';
 
 import markers from '../markers';
 
 const geoUrl = '/states.json';
-const pickedColorPath = '#50d45d';
-const colorPath = '#87877f';
 
 function MapChart() {
   console.log('<MapChart>');
-  const [statePicked, setStatePicked] = useState(undefined);
 
-  function handleStateClick(stateName) {
-    setStatePicked(stateName);
-  }
+  const selectedStatesCtx = useContext(StateSelectContext);
 
   return (
     <>
@@ -55,7 +50,13 @@ function MapChart() {
           {/* render markers */}
           {Object.entries(markers).map(([state, value]) => (
             <Marker key={state} coordinates={value.coordinates}>
-              <circle r={7} fill="#E42A1D" stroke="#fff" strokeWidth={0} />
+              {selectedStatesCtx.startState == state ||
+              selectedStatesCtx.endState == state ? (
+                <circle r={7} fill="#E42A1D" stroke="#000" strokeWidth={1} />
+              ) : (
+                <circle r={7} fill="#8a8a8a" stroke="#000" strokeWidth={1} />
+              )}
+
               <text
                 textAnchor="middle"
                 y={-10}
