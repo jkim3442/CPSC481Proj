@@ -26,7 +26,7 @@ export default function DropDown({ name, label }) {
 
         return (
           <option value={airport} data-name={name} key={name}>
-            {name} - {capital}
+            {name} - {capital} ({airport})
           </option>
         );
       })}
