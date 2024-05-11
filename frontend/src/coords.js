@@ -53,7 +53,7 @@ export const capitals_coordinates = [
     capital: 'Dover',
     latitude: 39.157307,
     longitude: -75.519722,
-    airport: 'DOV',
+    airport: 'PHL',
   },
   {
     name: 'Hawaii',
@@ -200,7 +200,7 @@ export const capitals_coordinates = [
     capital: 'Concord',
     latitude: 43.206898,
     longitude: -71.537994,
-    airport: 'CON',
+    airport: 'MHT',
   },
   {
     name: 'New Jersey',
@@ -256,7 +256,7 @@ export const capitals_coordinates = [
     capital: 'Salem',
     latitude: 44.938461,
     longitude: -123.030403,
-    airport: 'HAR',
+    airport: 'PDX',
   },
   {
     name: 'Pennsylvania',
@@ -312,7 +312,7 @@ export const capitals_coordinates = [
     capital: 'Montpelier',
     latitude: 44.262436,
     longitude: -72.580536,
-    airport: 'MPV',
+    airport: 'BTV',
   },
   {
     name: 'Virginia',
@@ -326,14 +326,14 @@ export const capitals_coordinates = [
     capital: 'Olympia',
     latitude: 47.035805,
     longitude: -122.905014,
-    airport: 'OLY',
+    airport: 'SEA',
   },
   {
     name: 'West Virginia',
     capital: 'Charleston',
     latitude: 38.336246,
     longitude: -81.612328,
-    airport: 'CHS',
+    airport: 'CRW',
   },
   {
     name: 'Wisconsin',
